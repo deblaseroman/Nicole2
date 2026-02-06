@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine?</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #ffb6c1, #ffdde1);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 80px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #d1005d;
+            margin-bottom: 20px;
+        }
+
+        .image-box {
+            margin: 20px auto;
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        /* ⭐ ADD YOUR PICTURE HERE ⭐ */
+        /* Replace the URL below with your own image link */
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            font-size: 22px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 20px;
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d79;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255,0,80,0.4);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #999;
+            color: white;
+            position: absolute;
+            transition: 0.1s;
+        }
+
+        #messageBox {
+            margin-top: 40px;
+            font-size: 26px;
+            color: #b3004b;
+            min-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Will you be my Valentine?</h1>
+
+        <div class="image-box">
+            <!-- ⭐ ADD YOUR PICTURE HERE ⭐ -->
+            <!-- Replace the src="" with your own image link -->
+            <img src="vpic.jpeg" alt="Your Picture Here">
+        </div>
+
+        <button id="yesBtn" class="btn">Yes</button>
+        <button id="noBtn" class="btn">No</button>
+
+        <div id="messageBox"></div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const msgBox = document.getElementById("messageBox");
+
+        let hoverCount = 0;
+
+        const messages = [
+            "stop.",
+            "why.",
+            "do you really want to hit this.",
+            "seriously?",
+            "unbelievable.",
+            "try again, I dare you.",
+            "you're really committed to 'no', huh?"
+        ];
+
+        // Make the "No" button move when mouse gets close
+        document.addEventListener("mousemove", (e) => {
+            const rect = noBtn.getBoundingClientRect();
+            const distance = Math.hypot(
+                e.clientX - (rect.left + rect.width / 2),
+                e.clientY - (rect.top + rect.height / 2)
+            );
+
+            if (distance < 120) {
+                hoverCount++;
+
+                const x = Math.random() * (window.innerWidth - 150);
+                const y = Math.random() * (window.innerHeight - 150);
+
+                noBtn.style.left = x + "px";
+                noBtn.style.top = y + "px";
+
+                if (hoverCount >= 3) {
+                    const index = (hoverCount - 3) % messages.length;
+                    msgBox.textContent = messages[index];
+                }
+            }
+        });
+
+        yesBtn.addEventListener("click", () => {
+            document.body.innerHTML = `
+                <div style="margin-top:120px;">
+                    <h1 style="color:#d1005d; font-size:55px;">
+                        Yay! Can't wait for Valentine's Day with you ❤️
+                    </h1>
+
+                    <div class="image-box" style="margin-top:40px;">
+                        <!-- ⭐ ADD ANOTHER PICTURE HERE ⭐ -->
+                        <img src="vpicc.jeg" alt="Happy Image">
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+
+</body>
+</html>
